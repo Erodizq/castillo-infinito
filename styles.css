@@ -1,0 +1,517 @@
+/* styles.css — El Castillo Infinito de Drácula */
+
+/* ── TOKENS ──────────────────────────────────────────────────────────────── */
+:root {
+  --bg-profundo:   #0d0507;
+  --bg-panel:      #150b0d;
+  --bg-panel2:     #1e1012;
+  --bg-card:       #251518;
+  --borde:         #3a1f22;
+  --borde-oro:     #7a5a1a;
+  --oro:           #c8a028;
+  --oro-claro:     #e8c848;
+  --rojo:          #8b1a1a;
+  --rojo-claro:    #cc3333;
+  --crema:         #e8d5b0;
+  --crema-apagada: #a89070;
+  --verde:         #2a5a1a;
+  --verde-claro:   #4a9a2a;
+  --azul:          #1a2a5a;
+  --azul-claro:    #3a5aaa;
+  --morado:        #3a1a5a;
+  --morado-claro:  #7a3aaa;
+  --peligro:       #cc2200;
+  --bien:          #44aa22;
+  --ruido-color:   #aa6600;
+
+  --fuente-display: 'Palatino Linotype', 'Book Antiqua', Palatino, serif;
+  --fuente-cuerpo:  Georgia, 'Times New Roman', serif;
+  --fuente-ui:      'Segoe UI', system-ui, sans-serif;
+
+  --radio:     6px;
+  --radio-lg:  10px;
+  --sombra:    0 2px 12px rgba(0,0,0,0.6);
+  --sombra-lg: 0 4px 24px rgba(0,0,0,0.8);
+}
+
+/* ── RESET ───────────────────────────────────────────────────────────────── */
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+html, body { height: 100%; overflow: hidden; }
+
+body {
+  background: var(--bg-profundo);
+  color: var(--crema);
+  font-family: var(--fuente-cuerpo);
+  font-size: 14px;
+  display: flex;
+  flex-direction: column;
+}
+
+/* ── CABECERA ─────────────────────────────────────────────────────────────── */
+header {
+  background: var(--bg-panel);
+  border-bottom: 1px solid var(--borde-oro);
+  padding: 10px 16px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-shrink: 0;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.5);
+}
+
+.titulo-juego {
+  font-family: var(--fuente-display);
+  font-size: 18px;
+  color: var(--oro);
+  letter-spacing: 0.04em;
+}
+
+.titulo-proto {
+  font-size: 10px;
+  color: var(--crema-apagada);
+  margin-left: 8px;
+}
+
+header button {
+  background: var(--rojo);
+  color: var(--crema);
+  border: 1px solid var(--rojo-claro);
+  padding: 6px 14px;
+  border-radius: var(--radio);
+  font-family: var(--fuente-cuerpo);
+  font-size: 12px;
+  cursor: pointer;
+  transition: background 0.2s;
+}
+header button:hover { background: var(--rojo-claro); }
+
+/* ── LAYOUT PRINCIPAL ────────────────────────────────────────────────────── */
+.app {
+  display: grid;
+  grid-template-columns: 240px 1fr 220px;
+  grid-template-rows: 1fr;
+  flex: 1;
+  overflow: hidden;
+  gap: 0;
+}
+
+/* ── PANEL IZQUIERDO — RECURSOS ──────────────────────────────────────────── */
+.panel-recursos {
+  background: var(--bg-panel);
+  border-right: 1px solid var(--borde);
+  display: flex;
+  flex-direction: column;
+  overflow-y: auto;
+  padding: 12px;
+  gap: 10px;
+}
+
+.seccion-titulo {
+  font-family: var(--fuente-display);
+  font-size: 11px;
+  color: var(--oro);
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  margin-bottom: 4px;
+  padding-bottom: 4px;
+  border-bottom: 1px solid var(--borde);
+}
+
+/* Tracks de recursos */
+.recurso {
+  background: var(--bg-card);
+  border: 1px solid var(--borde);
+  border-radius: var(--radio);
+  padding: 8px 10px;
+}
+
+.recurso-label {
+  font-size: 10px;
+  color: var(--crema-apagada);
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  margin-bottom: 6px;
+}
+
+.pips {
+  display: flex;
+  gap: 4px;
+}
+
+.pip {
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+  border: 2px solid;
+  transition: all 0.2s;
+}
+
+.pip.pip-vida.activo  { background: var(--rojo-claro); border-color: #ff6666; box-shadow: 0 0 6px rgba(204,51,51,0.5); }
+.pip.pip-vida.inactivo{ background: transparent; border-color: #3a1a1a; }
+.pip.pip-det.activo   { background: var(--azul-claro); border-color: #6688cc; box-shadow: 0 0 6px rgba(58,90,170,0.5); }
+.pip.pip-det.inactivo { background: transparent; border-color: #1a1a3a; }
+
+/* Track numérico */
+.track-num {
+  font-family: var(--fuente-display);
+  font-size: 28px;
+  font-weight: bold;
+  color: var(--crema);
+  text-align: center;
+  line-height: 1;
+}
+.track-num.warn   { color: var(--ruido-color); }
+.track-num.danger { color: var(--rojo-claro); text-shadow: 0 0 8px rgba(204,51,51,0.6); }
+
+.recurso-sublabel {
+  font-size: 9px;
+  color: var(--crema-apagada);
+  text-align: center;
+  margin-top: 2px;
+}
+
+/* Pistas y turno */
+.counters {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 6px;
+}
+
+.counter {
+  background: var(--bg-card);
+  border: 1px solid var(--borde);
+  border-radius: var(--radio);
+  padding: 6px 8px;
+  text-align: center;
+}
+
+.counter-val {
+  font-family: var(--fuente-display);
+  font-size: 20px;
+  color: var(--oro);
+}
+
+.counter-label {
+  font-size: 9px;
+  color: var(--crema-apagada);
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+}
+
+/* Estado de Pánico */
+#estado-panico {
+  display: none;
+  background: linear-gradient(135deg, #3a0a0a, #1a0505);
+  border: 2px solid var(--rojo-claro);
+  border-radius: var(--radio);
+  padding: 8px;
+  text-align: center;
+  font-family: var(--fuente-display);
+  font-size: 13px;
+  color: var(--rojo-claro);
+  animation: pulso 1.5s infinite;
+}
+#estado-panico.visible { display: block; }
+
+@keyframes pulso {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.6; }
+}
+
+/* ── ZONA CENTRAL — MAPA ─────────────────────────────────────────────────── */
+.zona-central {
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  background: #0a0305;
+}
+
+.mapa-wrapper {
+  flex: 1;
+  position: relative;
+  overflow: hidden;
+}
+
+#mapa-canvas {
+  display: block;
+  width: 100%;
+  height: 100%;
+}
+
+/* Panel de carta robada */
+#panel-carta {
+  display: none;
+  background: var(--bg-panel2);
+  border-top: 1px solid var(--borde-oro);
+  padding: 12px 16px;
+  flex-shrink: 0;
+}
+#panel-carta.visible { display: block; }
+
+.carta-robada {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.carta-icono { font-size: 28px; flex-shrink: 0; }
+
+.carta-titulo {
+  font-family: var(--fuente-display);
+  font-size: 15px;
+  color: var(--oro);
+  font-weight: bold;
+}
+
+.carta-puertas {
+  font-size: 11px;
+  color: var(--crema-apagada);
+  margin-top: 2px;
+}
+
+.carta-desc-panel {
+  font-size: 12px;
+  color: var(--crema);
+  margin-top: 4px;
+  font-style: italic;
+}
+
+/* Zona de acciones */
+#zona-acciones {
+  background: var(--bg-panel);
+  border-top: 1px solid var(--borde);
+  padding: 10px 14px;
+  display: flex;
+  gap: 8px;
+  flex-wrap: wrap;
+  flex-shrink: 0;
+}
+
+/* ── BOTONES ─────────────────────────────────────────────────────────────── */
+.btn {
+  font-family: var(--fuente-cuerpo);
+  font-size: 12px;
+  padding: 8px 14px;
+  border-radius: var(--radio);
+  border: 1px solid;
+  cursor: pointer;
+  transition: all 0.15s;
+  white-space: nowrap;
+}
+
+.btn-primary {
+  background: var(--rojo);
+  color: var(--crema);
+  border-color: var(--rojo-claro);
+}
+.btn-primary:hover { background: var(--rojo-claro); }
+
+.btn-secondary {
+  background: transparent;
+  color: var(--crema);
+  border-color: var(--borde-oro);
+}
+.btn-secondary:hover { background: var(--borde-oro); color: #000; }
+
+.btn-danger {
+  background: #2a0a0a;
+  color: var(--rojo-claro);
+  border-color: var(--rojo);
+}
+.btn-danger:hover { background: var(--rojo); color: var(--crema); }
+
+.btn-victoria {
+  background: linear-gradient(135deg, #1a4a1a, #2a7a2a);
+  color: #aaffaa;
+  border-color: var(--verde-claro);
+  font-weight: bold;
+  animation: brillo 2s infinite;
+}
+
+.btn-especial {
+  background: var(--morado);
+  color: #dda0ff;
+  border-color: var(--morado-claro);
+}
+.btn-especial:hover { background: var(--morado-claro); }
+
+@keyframes brillo {
+  0%, 100% { box-shadow: 0 0 6px rgba(74,154,42,0.4); }
+  50% { box-shadow: 0 0 16px rgba(74,154,42,0.9); }
+}
+
+/* ── PANEL DERECHO — INVENTARIO + LOG ────────────────────────────────────── */
+.panel-derecho {
+  background: var(--bg-panel);
+  border-left: 1px solid var(--borde);
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+}
+
+.panel-seccion {
+  padding: 10px;
+  border-bottom: 1px solid var(--borde);
+  overflow-y: auto;
+}
+
+.panel-seccion-log {
+  flex: 1;
+  padding: 10px;
+  overflow-y: auto;
+  min-height: 0;
+}
+
+/* Tesoros */
+.carta-tesoro {
+  background: var(--bg-card);
+  border: 1px solid var(--borde-oro);
+  border-radius: var(--radio);
+  padding: 6px 8px;
+  margin-bottom: 4px;
+  cursor: pointer;
+  transition: border-color 0.15s;
+}
+.carta-tesoro:hover { border-color: var(--oro); }
+.carta-tesoro .carta-nombre {
+  display: block;
+  font-size: 11px;
+  color: var(--oro-claro);
+  font-weight: bold;
+}
+.carta-tesoro .carta-desc {
+  display: block;
+  font-size: 9px;
+  color: var(--crema-apagada);
+  margin-top: 2px;
+}
+
+/* Reserva */
+.carta-reserva {
+  background: var(--bg-card);
+  border: 1px solid var(--borde);
+  border-radius: var(--radio);
+  padding: 6px 8px;
+  margin-bottom: 4px;
+  cursor: pointer;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  transition: border-color 0.15s;
+}
+.carta-reserva:hover { border-color: var(--borde-oro); }
+.carta-reserva .carta-nombre { font-size: 11px; color: var(--crema); }
+.carta-reserva .carta-puertas { font-size: 10px; color: var(--crema-apagada); }
+
+.empty-slot {
+  font-size: 10px;
+  color: var(--crema-apagada);
+  font-style: italic;
+  padding: 4px 0;
+}
+
+/* Log */
+#log-contenido { display: flex; flex-direction: column; gap: 3px; }
+
+.log-entrada {
+  font-size: 10px;
+  padding: 3px 5px;
+  border-radius: 3px;
+  border-left: 2px solid transparent;
+  line-height: 1.4;
+  font-family: var(--fuente-ui);
+}
+
+.log-normal       { color: var(--crema-apagada); border-color: var(--borde); }
+.log-info         { color: var(--crema); border-color: var(--borde-oro); }
+.log-peligro      { color: #ff8888; border-color: var(--rojo); background: rgba(139,26,26,0.15); }
+.log-bien         { color: #88ff88; border-color: var(--verde-claro); background: rgba(42,90,26,0.15); }
+.log-ruido        { color: #ffaa44; border-color: var(--ruido-color); }
+.log-dracula      { color: #cc44ff; border-color: var(--morado-claro); background: rgba(58,26,90,0.2); font-weight: bold; }
+.log-pista        { color: #44aaff; border-color: var(--azul-claro); background: rgba(26,42,90,0.2); }
+.log-descubrimiento { color: #cc88ff; border-color: var(--morado); }
+.log-victoria     { color: #aaffaa; border-color: var(--verde-claro); font-weight: bold; }
+.log-turno        { color: var(--borde-oro); border-color: var(--borde-oro); text-align: center; font-style: italic; }
+.log-inicio       { color: var(--oro); font-style: italic; }
+
+/* ── MODALES ─────────────────────────────────────────────────────────────── */
+#modal-overlay, #overlay-fin {
+  display: none;
+  position: fixed;
+  inset: 0;
+  background: rgba(0,0,0,0.75);
+  z-index: 100;
+  align-items: center;
+  justify-content: center;
+}
+#modal-overlay.visible, #overlay-fin.visible {
+  display: flex;
+}
+
+.modal-caja {
+  background: var(--bg-panel2);
+  border: 1px solid var(--borde-oro);
+  border-radius: var(--radio-lg);
+  padding: 24px;
+  max-width: 360px;
+  width: 90%;
+  box-shadow: var(--sombra-lg);
+}
+
+#modal-titulo {
+  font-family: var(--fuente-display);
+  font-size: 15px;
+  color: var(--crema);
+  margin-bottom: 16px;
+  line-height: 1.4;
+}
+
+#modal-botones {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.btn-modal { width: 100%; text-align: center; padding: 10px; }
+
+/* Fin de partida */
+.fin-caja {
+  background: var(--bg-panel2);
+  border: 2px solid;
+  border-radius: var(--radio-lg);
+  padding: 32px;
+  text-align: center;
+  max-width: 380px;
+  width: 90%;
+  box-shadow: var(--sombra-lg);
+}
+
+.fin-titulo {
+  font-family: var(--fuente-display);
+  font-size: 28px;
+  margin-bottom: 12px;
+}
+.fin-titulo.victoria { color: var(--verde-claro); }
+.fin-titulo.derrota  { color: var(--rojo-claro); }
+
+#fin-subtitulo {
+  font-size: 13px;
+  color: var(--crema-apagada);
+  margin-bottom: 24px;
+  line-height: 1.5;
+}
+
+.fin-caja .btn { width: 100%; text-align: center; padding: 12px; font-size: 14px; }
+
+/* ── SCROLLBAR ────────────────────────────────────────────────────────────── */
+::-webkit-scrollbar { width: 4px; }
+::-webkit-scrollbar-track { background: var(--bg-profundo); }
+::-webkit-scrollbar-thumb { background: var(--borde); border-radius: 2px; }
+::-webkit-scrollbar-thumb:hover { background: var(--borde-oro); }
+
+/* ── RESPONSIVE BÁSICO ────────────────────────────────────────────────────── */
+@media (max-width: 700px) {
+  .app { grid-template-columns: 1fr; grid-template-rows: auto 1fr auto; }
+  .panel-recursos { flex-direction: row; flex-wrap: wrap; overflow-x: auto; padding: 8px; gap: 6px; border-right: none; border-bottom: 1px solid var(--borde); max-height: 120px; }
+  .panel-derecho { display: none; }
+}
