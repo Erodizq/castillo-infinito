@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+  <title>El Castillo Infinito de Drácula</title>
+  <link rel="stylesheet" href="css/styles.css">
+</head>
+<body>
+<div id="app">
+
+  <!-- CABECERA -->
+  <div id="header">
+    <div>
+      <h1>El Castillo Infinito de Drácula</h1>
+      <span>Alpha 0.2</span>
+    </div>
+    <div id="header-btns">
+      <button class="btn btn-sec" id="btn-guardar" onclick="DB.guardar()" title="Guardar partida">💾 Guardar</button>
+      <button class="btn btn-sec" id="btn-cargar" onclick="DB.cargar()" disabled title="Cargar partida guardada">📂 Cargar</button>
+      <button class="btn btn-sec" onclick="G.nuevaPartida()">↺ Nueva</button>
+    </div>
+  </div>
+
+  <div id="main">
+
+    <!-- PANEL IZQUIERDO: RECURSOS -->
+    <div id="panel-left">
+      <div class="sec-title">Recursos</div>
+      <div class="recurso">
+        <div class="recurso-label">❤️ Vida</div>
+        <div class="pips" id="pips-vida"></div>
+      </div>
+      <div class="recurso">
+        <div class="recurso-label">🔵 Determinación</div>
+        <div class="pips" id="pips-det"></div>
+      </div>
+      <div id="panico-badge">⚠️ PÁNICO</div>
+      <div class="recurso">
+        <div class="recurso-label">🔔 Ruido</div>
+        <div class="bignum" id="num-ruido">0</div>
+        <div class="subnote">Evento en 5 / 10 / 15</div>
+      </div>
+      <div class="recurso">
+        <div class="recurso-label">🧛 Distancia Drácula</div>
+        <div class="bignum" id="num-dist">5</div>
+        <div class="subnote">Pierde si llega a 0</div>
+      </div>
+      <div class="counters">
+        <div class="counter">
+          <div class="counter-val" id="cnt-pistas">0/3</div>
+          <div class="counter-lbl">🔑 Pistas</div>
+        </div>
+        <div class="counter">
+          <div class="counter-val" id="cnt-turno">1</div>
+          <div class="counter-lbl">Turno</div>
+        </div>
+      </div>
+      <div class="counters">
+        <div class="counter">
+          <div class="counter-val" id="cnt-castillo">30</div>
+          <div class="counter-lbl">Castillo</div>
+        </div>
+        <div class="counter">
+          <div class="counter-val" id="cnt-amenazas">15</div>
+          <div class="counter-lbl">Amenazas</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ZONA CENTRAL: MAPA -->
+    <div id="centro">
+      <div id="mapa-area">
+        <canvas id="mapa-canvas"></canvas>
+        <div id="mapa-hint">Explora una habitación para empezar</div>
+      </div>
+      <div id="carta-panel"></div>
+      <div id="acciones"></div>
+
+      <!-- Barra móvil -->
+      <div id="mobile-bar">
+        <div class="mb-item"><div class="mb-val" id="m-vida">5</div><div class="mb-lbl">❤️</div></div>
+        <div class="mb-item"><div class="mb-val" id="m-det">3</div><div class="mb-lbl">🔵</div></div>
+        <div class="mb-item"><div class="mb-val" id="m-ruido">0</div><div class="mb-lbl">🔔</div></div>
+        <div class="mb-item"><div class="mb-val" id="m-dist">5</div><div class="mb-lbl">🧛</div></div>
+        <div class="mb-item"><div class="mb-val" id="m-pistas">0/3</div><div class="mb-lbl">🔑</div></div>
+      </div>
+    </div>
+
+    <!-- PANEL DERECHO: INVENTARIO + LOG -->
+    <div id="panel-right">
+      <div id="inv-area">
+        <div class="sec-title">💰 Tesoros (<span id="cnt-inv">0</span>/5)</div>
+        <div id="lista-tesoros"></div>
+      </div>
+      <div id="reserva-area">
+        <div class="sec-title">📦 Reserva (<span id="cnt-res">0</span>/2)</div>
+        <div id="lista-reserva"></div>
+      </div>
+      <div id="log-area">
+        <div class="sec-title">📜 Registro</div>
+        <div id="log-contenido"></div>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+<!-- MODAL GENÉRICO -->
+<div class="overlay" id="modal-overlay">
+  <div class="modal">
+    <h2 id="modal-titulo"></h2>
+    <p id="modal-desc"></p>
+    <div class="modal-btns" id="modal-btns"></div>
+  </div>
+</div>
+
+<!-- FIN DE PARTIDA -->
+<div class="overlay" id="fin-overlay">
+  <div class="modal" style="text-align:center">
+    <div id="fin-titulo"></div>
+    <div id="fin-razon"></div>
+    <button class="btn btn-pri" style="width:100%;padding:12px;font-size:14px"
+      onclick="G.nuevaPartida()">↺ Jugar de nuevo</button>
+  </div>
+</div>
+
+<!-- SCRIPTS -->
+<script src="js/state.js"></script>
+<script src="js/cards.js"></script>
+<script src="js/map.js"></script>
+<script src="js/effects.js"></script>
+<script src="js/engine.js"></script>
+<script src="js/ui.js"></script>
+<script src="js/firebase.js"></script>
+<script src="js/main.js"></script>
+
+</body>
+</html>
